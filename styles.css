@@ -37,27 +37,23 @@ th, td {
 
 /* Added styles for cell background colors */
 .cell-o {
-  background-color: #b3e0ff; /* 薄い青 */
+  background-color: #b3e0ff; /* より薄い青 */
 }
 
 .cell-triangle {
-  background-color: #ffff99; /* 薄い黄 */
+  background-color: #ffff99; /* より薄い黄 */
 }
 
 .cell-x {
-  background-color: #ff9999; /* 薄い赤 */
-}
-.cell-o {
-  background-color: blue; /* 青 */
+  background-color: #ff9999; /* より薄い赤 */
 }
 
-.cell-triangle {
-  background-color: yellow; /* 黄 */
+#commonTimes {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
-.cell-x {
-  background-color: red; /* 赤 */
-}
 
 #commonTimes {
   position: absolute;
