@@ -1,0 +1,12 @@
+#calendar {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  border: 1px solid black;
+  padding: 5px;
+  text-align: center;
+}
+.selected {
+  background-color: lightgreen;
+}
