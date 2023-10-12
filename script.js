@@ -136,11 +136,6 @@ function generateTables() {
 
 document.addEventListener("mousedown", () => { isDragging = true; });
 document.addEventListener("mouseup", () => { isDragging = false; });
-// 新しい関数：すべてのテーブルとセルデータをリセットする
-function resetAll() {
-  cellData = {};
-  generateTables();
-}
 
 // 修正された関数：セルのマークと背景色を設定
 function toggleCell(cell, date, user, time) {
@@ -160,7 +155,15 @@ function toggleCell(cell, date, user, time) {
   saveCellData(date, user, time, cell.textContent);
 }
 
-// 新しい関数：全てのユーザーが〇をつけた時間を出力
+// すべてのテーブルとセルデータ、ユーザーをリセットする
+function resetAll() {
+  cellData = {};
+  users = [];
+  generateTables();
+  findCommonTimes(); // この関数は後で追加します
+}
+
+// 登録しているユーザー全員が〇をつけた時間を出力
 function findCommonTimes() {
   const commonTimes = [];
   const dates = Object.keys(cellData);
@@ -174,5 +177,9 @@ function findCommonTimes() {
   }
   document.getElementById('commonTimes').textContent = commonTimes.join(', ');
 }
+
+// generateTables 関数の最後にこの行を追加
+findCommonTimes();
+
 
 
