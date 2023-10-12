@@ -136,5 +136,43 @@ function generateTables() {
 
 document.addEventListener("mousedown", () => { isDragging = true; });
 document.addEventListener("mouseup", () => { isDragging = false; });
+// 新しい関数：すべてのテーブルとセルデータをリセットする
+function resetAll() {
+  cellData = {};
+  generateTables();
+}
+
+// 修正された関数：セルのマークと背景色を設定
+function toggleCell(cell, date, user, time) {
+  cell.classList.remove('cell-o', 'cell-triangle', 'cell-x');
+  if (cell.textContent === currentSelection) {
+    cell.textContent = '';
+  } else {
+    cell.textContent = currentSelection;
+    if (currentSelection === '〇') {
+      cell.classList.add('cell-o');
+    } else if (currentSelection === '△') {
+      cell.classList.add('cell-triangle');
+    } else if (currentSelection === '×') {
+      cell.classList.add('cell-x');
+    }
+  }
+  saveCellData(date, user, time, cell.textContent);
+}
+
+// 新しい関数：全てのユーザーが〇をつけた時間を出力
+function findCommonTimes() {
+  const commonTimes = [];
+  const dates = Object.keys(cellData);
+  for (const date of dates) {
+    const timeSlots = Object.keys(cellData[date][users[0]] || {});
+    for (const time of timeSlots) {
+      if (users.every(user => cellData[date][user] && cellData[date][user][time] === '〇')) {
+        commonTimes.push(`${date} ${time}`);
+      }
+    }
+  }
+  document.getElementById('commonTimes').textContent = commonTimes.join(', ');
+}
 
 
