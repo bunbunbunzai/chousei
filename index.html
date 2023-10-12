@@ -7,13 +7,14 @@
 </head>
 <body>
   <h1>日程調整アプリ</h1>
+  <label for="userCount">ユーザー数: </label>
+  <input type="number" id="userCount" value="2">
+  <button onclick="updateUserCount()">更新</button>
   <table id="calendar">
     <thead>
       <tr>
         <th>Time</th>
-        <th>User 1</th>
-        <th>User 2</th>
-        <!-- Add more users here -->
+        <!-- User headers will be filled by JavaScript -->
       </tr>
     </thead>
     <tbody>
