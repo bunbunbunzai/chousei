@@ -35,4 +35,18 @@ th, td {
   transform: rotate(180deg);
 }
 
+/* Added styles for cell background colors */
+.cell-o {
+  background-color: #b3e0ff; /* 薄い青 */
+}
+
+.cell-triangle {
+  background-color: #ffff99; /* 薄い黄 */
+}
+
+.cell-x {
+  background-color: #ff9999; /* 薄い赤 */
+}
+
+
 
