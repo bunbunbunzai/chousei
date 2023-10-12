@@ -1,21 +1,16 @@
-let users = [];
+let users = ["User1", "User2"];
 let currentSelection = 'o';
-let isDragging = false;
 
 function addUser() {
   const newUser = document.getElementById("newUser").value;
   if (newUser) {
     users.push(newUser);
-    initializeCalendar();
+    generateTables();
   }
 }
 
 function setSelection(selection) {
   currentSelection = selection;
-}
-
-function checkAvailability() {
-  // Omitted for brevity; you can add the logic here
 }
 
 function createCalendarForDate(date) {
@@ -27,41 +22,62 @@ function createCalendarForDate(date) {
   dateDiv.appendChild(dateLabel);
   
   const table = document.createElement("table");
+  const tableBody = document.createElement("tbody");
   table.id = `calendar-${date}`;
   
-  // ... (same as before, to create the table)
+  const header = document.createElement("tr");
+  const timeHeader = document.createElement("th");
+  timeHeader.textContent = "Time";
+  header.appendChild(timeHeader);
+  users.forEach(user => {
+    const userHeader = document.createElement("th");
+    userHeader.textContent = user;
+    header.appendChild(userHeader);
+  });
+  tableBody.appendChild(header);
+
+  for (let hour = 0; hour < 24; hour++) {
+    ["00", "30"].forEach(minute => {
+      const row = document.createElement("tr");
+      const timeCell = document.createElement("td");
+      timeCell.textContent = `${String(hour).padStart(2, "0")}:${minute}`;
+      row.appendChild(timeCell);
+
+      users.forEach(() => {
+        const cell = document.createElement("td");
+        cell.addEventListener("click", function() {
+          this.className = currentSelection;
+        });
+        row.appendChild(cell);
+      });
+      
+      tableBody.appendChild(row);
+    });
+  }
   
+  table.appendChild(tableBody);
   dateDiv.appendChild(table);
   document.getElementById("dates").appendChild(dateDiv);
 }
 
-function initializeCalendar() {
-  // ... (same as before)
-  
-  // Add mouse event listeners for drag-to-fill functionality
-  tableBody.addEventListener("mousedown", e => {
-    isDragging = true;
-    if (e.target.tagName === "TD") {
-      e.target.className = currentSelection;
-    }
-  });
-  
-  tableBody.addEventListener("mouseover", e => {
-    if (isDragging && e.target.tagName === "TD") {
-      e.target.className = currentSelection;
-    }
-  });
-  
-  tableBody.addEventListener("mouseup", () => {
-    isDragging = false;
-  });
-  
-  // Add date
-  createCalendarForDate("2022-01-01");  // Replace with actual date
-  createCalendarForDate("2022-01-02");  // Replace with actual date
-  
-  checkAvailability();
+function generateTables() {
+  const startDate = new Date(document.getElementById("startDate").value);
+  const endDate = new Date(document.getElementById("endDate").value);
+
+  if (startDate > endDate) {
+    alert("開始日は終了日より前でなければなりません。");
+    return;
+  }
+
+  const datesDiv = document.getElementById("dates");
+  datesDiv.innerHTML = "";
+
+  for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
+    const dateString = date.toISOString().split("T")[0];
+    createCalendarForDate(dateString);
+  }
 }
 
-// Initialize
-initializeCalendar();
+// 初期化
+generateTables();
+
