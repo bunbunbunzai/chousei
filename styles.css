@@ -1,11 +1,14 @@
 #calendar {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 th, td {
   border: 1px solid black;
   padding: 5px;
   text-align: center;
+  width: 50px;
+  overflow: hidden;
 }
 .o {
   background-color: lightgreen;
@@ -16,3 +19,4 @@ th, td {
 .x {
   background-color: lightcoral;
 }
+
