@@ -1,6 +1,13 @@
-let users = [];  // No pre-added users
+let users = [];
 let currentSelection = '〇';
 let isDragging = false;
+
+document.addEventListener('DOMContentLoaded', function() {
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('startDate').value = today;
+  document.getElementById('endDate').value = today;
+  generateTables();
+});
 
 function addUser() {
   const newUser = document.getElementById("newUser").value;
@@ -29,7 +36,7 @@ function createCalendarForDate(date) {
   const userHeader = document.createElement("th");
   userHeader.textContent = "User";
   header.appendChild(userHeader);
-
+  
   for (let hour = 0; hour < 24; hour++) {
     ["00", "30"].forEach(minute => {
       const timeHeader = document.createElement("th");
@@ -38,6 +45,7 @@ function createCalendarForDate(date) {
       header.appendChild(timeHeader);
     });
   }
+  
   tableBody.appendChild(header);
   
   users.forEach(user => {
@@ -74,7 +82,16 @@ function generateTables() {
     alert("開始日は終了日より前でなければなりません。");
     return;
   }
+  
   const datesDiv = document.getElementById("dates");
-  dates
+  datesDiv.innerHTML = "";
+  for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
+    const dateString = date.toISOString().split("T")[0];
+    createCalendarForDate(dateString);
+  }
+}
+
+document.addEventListener("mousedown", () => { isDragging = true; });
+document.addEventListener("mouseup", () => { isDragging = false; });
 
 
