@@ -7,21 +7,27 @@
 </head>
 <body>
   <h1>日程調整アプリ</h1>
-  <label for="userCount">ユーザー数: </label>
-  <input type="number" id="userCount" value="2">
-  <button onclick="updateUserCount()">更新</button>
-  <table id="calendar">
-    <thead>
-      <tr>
-        <th>Time</th>
-        <!-- User headers will be filled by JavaScript -->
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Filled by JavaScript -->
-    </tbody>
-  </table>
+  
+  <label for="newUser">新しいユーザー名: </label>
+  <input type="text" id="newUser">
+  <button onclick="addUser()">追加</button>
+  
+  <div id="selection">
+    <button onclick="setSelection('o')">〇</button>
+    <button onclick="setSelection('triangle')">△</button>
+    <button onclick="setSelection('x')">×</button>
+  </div>
+  
+  <div id="dates">
+    <!-- Dates will be filled by JavaScript -->
+  </div>
+  
+  <div id="result">
+    <!-- Results will be filled by JavaScript -->
+  </div>
+  
   <script src="script.js"></script>
 </body>
 </html>
+
 
