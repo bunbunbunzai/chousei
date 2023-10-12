@@ -14,7 +14,7 @@ label, input, button {
   margin: 0.5em;
 }
 
-#calendar {
+table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
@@ -28,15 +28,9 @@ th, td {
   overflow: hidden;
 }
 
-.o {
-  background-color: lightgreen;
-}
-
-.triangle {
-  background-color: lightyellow;
-}
-
-.x {
-  background-color: lightcoral;
+/* For rotated header text */
+.rotate {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
 }
 
