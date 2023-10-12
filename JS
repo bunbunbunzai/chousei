@@ -24,3 +24,4 @@ hours.forEach(hour => {
     tableBody.appendChild(row);
   });
 });
+
