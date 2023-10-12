@@ -2,6 +2,7 @@ body {
   font-size: 16px;
   margin: 0;
   padding: 0;
+  background-color: #ccffcc;  /* 薄い黄緑 */
 }
 
 h1 {
@@ -22,9 +23,9 @@ table {
 
 th, td {
   border: 1px solid black;
-  padding: 5px;
+  padding: 2px;  /* サイズを小さく */
   text-align: center;
-  width: 50px;
+  width: 30px;  /* サイズを小さく */
   overflow: hidden;
 }
 
