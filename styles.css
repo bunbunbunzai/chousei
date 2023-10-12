@@ -47,6 +47,23 @@ th, td {
 .cell-x {
   background-color: #ff9999; /* 薄い赤 */
 }
+.cell-o {
+  background-color: blue; /* 青 */
+}
+
+.cell-triangle {
+  background-color: yellow; /* 黄 */
+}
+
+.cell-x {
+  background-color: red; /* 赤 */
+}
+
+#commonTimes {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
 
 
