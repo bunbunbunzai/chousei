@@ -18,12 +18,16 @@
     <button onclick="setSelection('x')">×</button>
   </div>
   
+  <label for="startDate">開始日:</label>
+  <input type="date" id="startDate">
+  
+  <label for="endDate">終了日:</label>
+  <input type="date" id="endDate">
+  
+  <button onclick="generateTables()">テーブル生成</button>
+  
   <div id="dates">
     <!-- Dates will be filled by JavaScript -->
-  </div>
-  
-  <div id="result">
-    <!-- Results will be filled by JavaScript -->
   </div>
   
   <script src="script.js"></script>
