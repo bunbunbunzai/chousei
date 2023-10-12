@@ -1,6 +1,7 @@
 let users = [];
 let currentSelection = '〇';
 let isDragging = false;
+let cellData = {};
 
 document.addEventListener('DOMContentLoaded', function() {
   const today = new Date().toISOString().split('T')[0];
@@ -11,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function addUser() {
   const newUser = document.getElementById("newUser").value;
-  if (newUser) {
+  if (newUser && !users.includes(newUser)) {
     users.push(newUser);
     generateTables();
   }
@@ -19,6 +20,36 @@ function addUser() {
 
 function setSelection(selection) {
   currentSelection = selection;
+}
+
+function toggleCell(cell) {
+  cell.classList.remove('cell-o', 'cell-triangle', 'cell-x');
+  if (cell.textContent === currentSelection) {
+    cell.textContent = '';
+  } else {
+    cell.textContent = currentSelection;
+    if (currentSelection === '〇') {
+      cell.classList.add('cell-o');
+    } else if (currentSelection === '△') {
+      cell.classList.add('cell-triangle');
+    } else if (currentSelection === '×') {
+      cell.classList.add('cell-x');
+    }
+  }
+}
+
+function saveCellData(date, user, time, value) {
+  if (!cellData[date]) {
+    cellData[date] = {};
+  }
+  if (!cellData[date][user]) {
+    cellData[date][user] = {};
+  }
+  cellData[date][user][time] = value;
+}
+
+function loadCellData(date, user, time) {
+  return cellData[date] && cellData[date][user] && cellData[date][user][time] || '';
 }
 
 function createCalendarForDate(date) {
@@ -36,7 +67,7 @@ function createCalendarForDate(date) {
   const userHeader = document.createElement("th");
   userHeader.textContent = "User";
   header.appendChild(userHeader);
-  
+
   for (let hour = 0; hour < 24; hour++) {
     ["00", "30"].forEach(minute => {
       const timeHeader = document.createElement("th");
@@ -55,14 +86,26 @@ function createCalendarForDate(date) {
     row.appendChild(userNameCell);
     
     for (let hour = 0; hour < 24; hour++) {
-      ["00", "30"].forEach(() => {
+      ["00", "30"].forEach(minute => {
         const cell = document.createElement("td");
         cell.addEventListener("click", function() {
-          this.textContent = currentSelection;
+          toggleCell(this);
+          saveCellData(date, user, `${hour}:${minute}`, this.textContent);
         });
         cell.addEventListener("mouseover", function() {
-          if (isDragging) this.textContent = currentSelection;
+          if (isDragging) {
+            toggleCell(this);
+            saveCellData(date, user, `${hour}:${minute}`, this.textContent);
+          }
         });
+        cell.textContent = loadCellData(date, user, `${hour}:${minute}`);
+        if (cell.textContent === '〇') {
+          cell.classList.add('cell-o');
+        } else if (cell.textContent === '△') {
+          cell.classList.add('cell-triangle');
+        } else if (cell.textContent === '×') {
+          cell.classList.add('cell-x');
+        }
         row.appendChild(cell);
       });
     }
