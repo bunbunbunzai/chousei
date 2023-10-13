@@ -4,9 +4,11 @@ let isDragging = false;
 let cellData = JSON.parse(localStorage.getItem('cellData')) || {};
 
 document.addEventListener('DOMContentLoaded', function() {
+  const storedStartDate = localStorage.getItem('startDate');
+  const storedEndDate = localStorage.getItem('endDate');
   const today = new Date().toISOString().split('T')[0];
-  document.getElementById('startDate').value = today;
-  document.getElementById('endDate').value = today;
+  document.getElementById('startDate').value = storedStartDate || today;
+  document.getElementById('endDate').value = storedEndDate || today;
   generateTables();
 });
 
@@ -58,15 +60,12 @@ function loadCellData(date, user, time) {
 function createCalendarForDate(date) {
   const dateDiv = document.createElement("div");
   dateDiv.className = 'date';
-
   const dateLabel = document.createElement("h2");
   const day = new Date(date).toLocaleDateString('ja-JP', { weekday: 'long' });
   dateLabel.textContent = `${date} (${day})`;
   dateDiv.appendChild(dateLabel);
-
   const table = document.createElement("table");
   const tableBody = document.createElement("tbody");
-
   const header = document.createElement("tr");
   const userHeader = document.createElement("th");
   userHeader.textContent = "User";
@@ -129,6 +128,9 @@ function generateTables() {
     return;
   }
 
+  localStorage.setItem('startDate', startDate.toISOString().split('T')[0]);
+  localStorage.setItem('endDate', endDate.toISOString().split('T')[0]);
+
   const datesDiv = document.getElementById("dates");
   datesDiv.innerHTML = "";
   for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
@@ -140,16 +142,18 @@ function generateTables() {
 document.addEventListener("mousedown", () => { isDragging = true; });
 document.addEventListener("mouseup", () => { isDragging = false; });
 
-// すべてのテーブルとセルデータ、ユーザーをリセットする
 function resetAll() {
   cellData = {};
   users = [];
   localStorage.setItem('cellData', JSON.stringify(cellData));
   localStorage.setItem('users', JSON.stringify(users));
   const today = new Date().toISOString().split('T')[0];
+  localStorage.setItem('startDate', today);
+  localStorage.setItem('endDate', today);
   document.getElementById('startDate').value = today;
   document.getElementById('endDate').value = today;
   document.getElementById('newUser').value = '';
   document.getElementById('commonTimes').textContent = '';
   generateTables();
 }
+
