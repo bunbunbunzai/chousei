@@ -1,35 +1,21 @@
-let users = [];
+let users = JSON.parse(localStorage.getItem('users')) || [];
 let currentSelection = '〇';
 let isDragging = false;
-let cellData = {};
+let cellData = JSON.parse(localStorage.getItem('cellData')) || {};
 
-// Load data from localStorage on page load
 document.addEventListener('DOMContentLoaded', function() {
-  const storedData = JSON.parse(localStorage.getItem('cellData') || '{}');
-  const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
-  cellData = storedData;
-  users = storedUsers;
-  
   const today = new Date().toISOString().split('T')[0];
   document.getElementById('startDate').value = today;
   document.getElementById('endDate').value = today;
-  
   generateTables();
 });
 
-// Save data to localStorage
-function saveDataToLocalStorage() {
-  localStorage.setItem('cellData', JSON.stringify(cellData));
-  localStorage.setItem('users', JSON.stringify(users));
-}
-
-// Add new user
 function addUser() {
   const newUser = document.getElementById("newUser").value;
   if (newUser && !users.includes(newUser)) {
     users.push(newUser);
+    localStorage.setItem('users', JSON.stringify(users));
     generateTables();
-    saveDataToLocalStorage();
   }
 }
 
@@ -62,68 +48,60 @@ function saveCellData(date, user, time, value) {
     cellData[date][user] = {};
   }
   cellData[date][user][time] = value;
-  saveDataToLocalStorage();
+  localStorage.setItem('cellData', JSON.stringify(cellData));
 }
 
 function loadCellData(date, user, time) {
   return cellData[date] && cellData[date][user] && cellData[date][user][time] || '';
 }
 
-function generateTables() {
-  const datesDiv = document.getElementById("dates");
-  datesDiv.innerHTML = "";
-
-  const startDate = new Date(document.getElementById("startDate").value);
-  const endDate = new Date(document.getElementById("endDate").value);
-  
-  for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
-    const dateString = date.toISOString().split("T")[0];
-    createCalendarForDate(dateString);
-  }
-}
-
 function createCalendarForDate(date) {
   const dateDiv = document.createElement("div");
   dateDiv.className = 'date';
-  
+
   const dateLabel = document.createElement("h2");
-  dateLabel.textContent = date;
+  const day = new Date(date).toLocaleDateString('ja-JP', { weekday: 'long' });
+  dateLabel.textContent = `${date} (${day})`;
   dateDiv.appendChild(dateLabel);
-  
+
   const table = document.createElement("table");
   const tableBody = document.createElement("tbody");
-  
-  const header = document.createElement("tr");
-  const timeHeader = document.createElement("th");
-  timeHeader.textContent = "Time";
-  header.appendChild(timeHeader);
 
-  for (const user of users) {
-    const userHeader = document.createElement("th");
-    userHeader.textContent = user;
-    header.appendChild(userHeader);
-  }
-  
-  tableBody.appendChild(header);
-  
+  const header = document.createElement("tr");
+  const userHeader = document.createElement("th");
+  userHeader.textContent = "User";
+  header.appendChild(userHeader);
+
   for (let hour = 0; hour < 24; hour++) {
     ["00", "30"].forEach(minute => {
-      const row = document.createElement("tr");
-      const timeCell = document.createElement("td");
-      timeCell.textContent = `${String(hour).padStart(2, "0")}:${minute}`;
-      row.appendChild(timeCell);
-      
-      users.forEach(user => {
+      const timeHeader = document.createElement("th");
+      timeHeader.textContent = `${String(hour).padStart(2, "0")}:${minute}`;
+      timeHeader.className = 'rotate';
+      header.appendChild(timeHeader);
+    });
+  }
+
+  tableBody.appendChild(header);
+
+  users.forEach(user => {
+    const row = document.createElement("tr");
+    const userNameCell = document.createElement("td");
+    userNameCell.textContent = user;
+    row.appendChild(userNameCell);
+
+    for (let hour = 0; hour < 24; hour++) {
+      ["00", "30"].forEach(minute => {
         const cell = document.createElement("td");
+        const time = `${hour}:${minute}`;
         cell.addEventListener("click", function() {
-          toggleCell(this, date, user, `${hour}:${minute}`);
+          toggleCell(this, date, user, time);
         });
         cell.addEventListener("mouseover", function() {
           if (isDragging) {
-            toggleCell(this, date, user, `${hour}:${minute}`);
+            toggleCell(this, date, user, time);
           }
         });
-        cell.textContent = loadCellData(date, user, `${hour}:${minute}`);
+        cell.textContent = loadCellData(date, user, time);
         if (cell.textContent === '〇') {
           cell.classList.add('cell-o');
         } else if (cell.textContent === '△') {
@@ -133,23 +111,33 @@ function createCalendarForDate(date) {
         }
         row.appendChild(cell);
       });
-      
-      tableBody.appendChild(row);
-    });
-  }
-  
+    }
+
+    tableBody.appendChild(row);
+  });
+
   table.appendChild(tableBody);
   dateDiv.appendChild(table);
   document.getElementById("dates").appendChild(dateDiv);
 }
 
+function generateTables() {
+  const startDate = new Date(document.getElementById("startDate").value);
+  const endDate = new Date(document.getElementById("endDate").value);
+  if (startDate > endDate) {
+    alert("開始日は終了日より前でなければなりません。");
+    return;
+  }
+
+  const datesDiv = document.getElementById("dates");
+  datesDiv.innerHTML = "";
+  for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
+    const dateString = date.toISOString().split("T")[0];
+    createCalendarForDate(dateString);
+  }
+}
+
 document.addEventListener("mousedown", () => { isDragging = true; });
 document.addEventListener("mouseup", () => { isDragging = false; });
 
-function resetAll() {
-  cellData = {};
-  users = [];
-  generateTables();
-  saveDataToLocalStorage();
-}
 
