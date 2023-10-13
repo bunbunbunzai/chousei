@@ -159,9 +159,14 @@ function toggleCell(cell, date, user, time) {
 function resetAll() {
   cellData = {};
   users = [];
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('startDate').value = today;
+  document.getElementById('endDate').value = today;
+  document.getElementById('newUser').value = '';
+  document.getElementById('commonTimes').textContent = '';
   generateTables();
-  findCommonTimes(); // この関数は後で追加します
 }
+
 
 // 登録しているユーザー全員が〇をつけた時間を出力
 function findCommonTimes() {
