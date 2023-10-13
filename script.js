@@ -140,4 +140,16 @@ function generateTables() {
 document.addEventListener("mousedown", () => { isDragging = true; });
 document.addEventListener("mouseup", () => { isDragging = false; });
 
-
+// すべてのテーブルとセルデータ、ユーザーをリセットする
+function resetAll() {
+  cellData = {};
+  users = [];
+  localStorage.setItem('cellData', JSON.stringify(cellData));
+  localStorage.setItem('users', JSON.stringify(users));
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('startDate').value = today;
+  document.getElementById('endDate').value = today;
+  document.getElementById('newUser').value = '';
+  document.getElementById('commonTimes').textContent = '';
+  generateTables();
+}
