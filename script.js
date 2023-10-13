@@ -186,5 +186,18 @@ function findCommonTimes() {
 // generateTables 関数の最後にこの行を追加
 findCommonTimes();
 
+function createCalendarForDate(date) {
+  const dateDiv = document.createElement("div");
+  dateDiv.className = 'date';
+  
+  const dateLabel = document.createElement("h2");
+  const day = new Date(date).toLocaleDateString('ja-JP', { weekday: 'long' });
+  dateLabel.textContent = `${date} (${day})`; // 曜日も表示
+  dateDiv.appendChild(dateLabel);
+  
+  // ...（その他のコードは変わらず）
+}
+
+
 
 
