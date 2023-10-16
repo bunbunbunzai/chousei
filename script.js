@@ -76,7 +76,7 @@ function createCalendarForDate(date) {
     ["00", "30"].forEach(minute => {
       const timeHeader = document.createElement("th");
       const nextHour = (hour + 1) % 24;
-      const timeText = `${String(hour).padStart(2, "0")}:${minute}~${String(nextHour).padStart(2, "0")}:${minute}`;
+      const timeText = `${String(hour).padStart(2, "0")}:${minute}`;
       timeHeader.textContent = timeText;
       timeHeader.className = 'rotate';
       header.appendChild(timeHeader);
