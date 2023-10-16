@@ -1,65 +1,63 @@
 body {
-  font-size: 16px;
-  margin: 0;
-  padding: 0;
-  background-color: #ccffcc;  /* 薄い黄緑 */
+  background-color: #ccffcc;
+  font-family: Arial, sans-serif;
 }
 
-h1 {
-  font-size: 1.5em;
-  margin: 0.5em;
-}
-
-label, input, button {
-  font-size: 1em;
-  margin: 0.5em;
+.date {
+  margin-bottom: 40px;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 10px;
   table-layout: fixed;
 }
 
 th, td {
-  border: 1px solid black;
-  padding: 2px;  /* サイズを小さく */
+  border: 1px solid #ccc;
   text-align: center;
-  width: 30px;  /* サイズを小さく */
-  overflow: hidden;
+  padding: 5px;
 }
 
-/* For rotated header text */
+th {
+  background-color: #f2f2f2;
+}
+
 .rotate {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
+  transform: rotate(270deg);
+  white-space: nowrap;
 }
 
-/* Added styles for cell background colors */
 .cell-o {
-  background-color: #b3e0ff; /* より薄い青 */
+  background-color: rgba(0, 0, 255, 0.3);
 }
 
 .cell-triangle {
-  background-color: #ffff99; /* より薄い黄 */
+  background-color: rgba(255, 255, 0, 0.3);
 }
 
 .cell-x {
-  background-color: #ff9999; /* より薄い赤 */
+  background-color: rgba(255, 0, 0, 0.3);
 }
 
-#commonTimes {
-  position: absolute;
-  top: 0;
-  right: 0;
+/* Add this for adjusting cell width */
+td, th {
+  min-width: 30px;
+  max-width: 30px;
+  width: 30px;
+  overflow: hidden;
 }
 
-
-#commonTimes {
-  position: absolute;
-  top: 0;
-  right: 0;
+/* Fix for mobile display */
+@media (max-width: 768px) {
+  th, td {
+    min-width: 60px;
+    max-width: 60px;
+    width: 60px;
+  }
 }
+
 
 
 
