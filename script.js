@@ -60,7 +60,6 @@ function loadCellData(date, user, time) {
 function createCalendarForDate(date) {
   const dateDiv = document.createElement("div");
   dateDiv.className = 'date';
-
   const dateLabel = document.createElement("h2");
   const day = new Date(date).toLocaleDateString('ja-JP', { weekday: 'long' });
   dateLabel.textContent = `${date} (${day})`;
@@ -68,7 +67,6 @@ function createCalendarForDate(date) {
 
   const table = document.createElement("table");
   const tableBody = document.createElement("tbody");
-
   const header = document.createElement("tr");
   const userHeader = document.createElement("th");
   userHeader.textContent = "User";
@@ -77,7 +75,9 @@ function createCalendarForDate(date) {
   for (let hour = 0; hour < 24; hour++) {
     ["00", "30"].forEach(minute => {
       const timeHeader = document.createElement("th");
-      timeHeader.textContent = `${String(hour).padStart(2, "0")}:${minute}`;
+      const nextHour = (hour + 1) % 24;
+      const timeText = `${String(hour).padStart(2, "0")}:${minute}~${String(nextHour).padStart(2, "0")}:${minute}`;
+      timeHeader.textContent = timeText;
       timeHeader.className = 'rotate';
       header.appendChild(timeHeader);
     });
