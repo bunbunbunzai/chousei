@@ -60,28 +60,19 @@ function loadCellData(date, user, time) {
 function createCalendarForDate(date) {
   const dateDiv = document.createElement("div");
   dateDiv.className = 'date';
+
   const dateLabel = document.createElement("h2");
   const day = new Date(date).toLocaleDateString('ja-JP', { weekday: 'long' });
   dateLabel.textContent = `${date} (${day})`;
   dateDiv.appendChild(dateLabel);
+
   const table = document.createElement("table");
   const tableBody = document.createElement("tbody");
+
   const header = document.createElement("tr");
   const userHeader = document.createElement("th");
   userHeader.textContent = "User";
   header.appendChild(userHeader);
-
-  for (let hour = 0; hour < 24; hour++) {
-  ["00", "30"].forEach((minute, index) => {
-    const nextMinute = index === 0 ? "30" : "00";
-    const nextHour = index === 0 ? hour : hour + 1;
-    const timeHeader = document.createElement("th");
-    timeHeader.textContent = `${String(hour).padStart(2, "0")}:${minute}~${String(nextHour).padStart(2, "0")}:${nextMinute}`;
-    timeHeader.className = 'rotate';
-    header.appendChild(timeHeader);
-  });
-  }
-
 
   for (let hour = 0; hour < 24; hour++) {
     ["00", "30"].forEach(minute => {
@@ -168,4 +159,5 @@ function resetAll() {
   document.getElementById('commonTimes').textContent = '';
   generateTables();
 }
+
 
