@@ -75,7 +75,6 @@ function createCalendarForDate(date) {
     ["00", "30"].forEach(minute => {
       const timeHeader = document.createElement("th");
       timeHeader.textContent = `${String(hour).padStart(2, "0")}:${minute}~`;
-      timeHeader.className = 'rotate';
       header.appendChild(timeHeader);
     });
   }
@@ -92,7 +91,7 @@ function createCalendarForDate(date) {
       ["00", "30"].forEach(minute => {
         const cell = document.createElement("td");
         const time = `${hour}:${minute}`;
-        cell.addEventListener("click", function() {
+        cell.addEventListener("mousedown", function() {
           toggleCell(this, date, user, time);
         });
         cell.addEventListener("mouseover", function() {
@@ -100,6 +99,14 @@ function createCalendarForDate(date) {
             toggleCell(this, date, user, time);
           }
         });
+        // For mobile touch support
+        cell.addEventListener("touchstart", function() {
+          toggleCell(this, date, user, time);
+        });
+        cell.addEventListener("touchmove", function() {
+          toggleCell(this, date, user, time);
+        });
+
         cell.textContent = loadCellData(date, user, time);
         if (cell.textContent === '〇') {
           cell.classList.add('cell-o');
@@ -142,6 +149,10 @@ function generateTables() {
 document.addEventListener("mousedown", () => { isDragging = true; });
 document.addEventListener("mouseup", () => { isDragging = false; });
 
+// For mobile touch support
+document.addEventListener("touchstart", () => { isDragging = true; });
+document.addEventListener("touchend", () => { isDragging = false; });
+
 function resetAll() {
   cellData = {};
   users = [];
@@ -156,6 +167,7 @@ function resetAll() {
   document.getElementById('commonTimes').textContent = '';
   generateTables();
 }
+
 
 
 
