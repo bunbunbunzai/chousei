@@ -64,7 +64,6 @@ function createCalendarForDate(date) {
   const day = new Date(date).toLocaleDateString('ja-JP', { weekday: 'long' });
   dateLabel.textContent = `${date} (${day})`;
   dateDiv.appendChild(dateLabel);
-
   const table = document.createElement("table");
   const tableBody = document.createElement("tbody");
   const header = document.createElement("tr");
@@ -75,9 +74,7 @@ function createCalendarForDate(date) {
   for (let hour = 0; hour < 24; hour++) {
     ["00", "30"].forEach(minute => {
       const timeHeader = document.createElement("th");
-      const nextHour = (hour + 1) % 24;
-      const timeText = `${String(hour).padStart(2, "0")}:${minute}`;
-      timeHeader.textContent = timeText;
+      timeHeader.textContent = `${String(hour).padStart(2, "0")}:${minute}~`;
       timeHeader.className = 'rotate';
       header.appendChild(timeHeader);
     });
@@ -159,5 +156,6 @@ function resetAll() {
   document.getElementById('commonTimes').textContent = '';
   generateTables();
 }
+
 
 
