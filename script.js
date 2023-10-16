@@ -152,8 +152,6 @@ document.addEventListener("touchstart", () => { isDragging = true; });
 document.addEventListener("touchend", () => { isDragging = false; });
 
 function showCommonTimes() {
-  let commonTimes = ""; // この変数に全員〇の時間を格納する
-function showCommonTimes() {
   let commonTimes = {};
   for (const date in cellData) {
     commonTimes[date] = {};
@@ -180,11 +178,3 @@ function showCommonTimes() {
 
   document.getElementById('commonTimes').textContent = output;
 }
-
-
-  document.getElementById('commonTimes').textContent = commonTimes;
-}
-
-
-
-
