@@ -208,3 +208,20 @@ function showCommonTimes() {
   document.getElementById('commonTimes').textContent = output;
 }
 
+
+// リセット機能
+function resetAll() {
+  cellData = {};
+  users = [];
+  localStorage.setItem('cellData', JSON.stringify(cellData));
+  localStorage.setItem('users', JSON.stringify(users));
+  const today = new Date().toISOString().split('T')[0];
+  localStorage.setItem('startDate', today);
+  localStorage.setItem('endDate', today);
+  document.getElementById('startDate').value = today;
+  document.getElementById('endDate').value = today;
+  document.getElementById('newUser').value = '';
+  document.getElementById('commonTimes').textContent = '';
+  generateTables();
+}
+
