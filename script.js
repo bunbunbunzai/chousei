@@ -74,7 +74,8 @@ function createCalendarForDate(date) {
   for (let hour = 0; hour < 24; hour++) {
     ["00", "30"].forEach(minute => {
       const timeHeader = document.createElement("th");
-      timeHeader.innerHTML = `${String(hour).padStart(2, "0")}<br>:${minute}~`;
+      timeHeader.textContent = `${String(hour).padStart(2, "0")}:${minute}~`;
+      timeHeader.classList.add("rotate");
       header.appendChild(timeHeader);
     });
   }
@@ -99,7 +100,6 @@ function createCalendarForDate(date) {
             toggleCell(this, date, user, time);
           }
         });
-        // For mobile touch support
         cell.addEventListener("touchstart", function() {
           toggleCell(this, date, user, time);
         });
@@ -148,24 +148,41 @@ function generateTables() {
 
 document.addEventListener("mousedown", () => { isDragging = true; });
 document.addEventListener("mouseup", () => { isDragging = false; });
-
-// For mobile touch support
 document.addEventListener("touchstart", () => { isDragging = true; });
 document.addEventListener("touchend", () => { isDragging = false; });
 
-function resetAll() {
-  cellData = {};
-  users = [];
-  localStorage.setItem('cellData', JSON.stringify(cellData));
-  localStorage.setItem('users', JSON.stringify(users));
-  const today = new Date().toISOString().split('T')[0];
-  localStorage.setItem('startDate', today);
-  localStorage.setItem('endDate', today);
-  document.getElementById('startDate').value = today;
-  document.getElementById('endDate').value = today;
-  document.getElementById('newUser').value = '';
-  document.getElementById('commonTimes').textContent = '';
-  generateTables();
+function showCommonTimes() {
+  let commonTimes = ""; // この変数に全員〇の時間を格納する
+function showCommonTimes() {
+  let commonTimes = {};
+  for (const date in cellData) {
+    commonTimes[date] = {};
+    for (const user in cellData[date]) {
+      for (const time in cellData[date][user]) {
+        if (!commonTimes[date][time]) {
+          commonTimes[date][time] = 0;
+        }
+        if (cellData[date][user][time] === '〇') {
+          commonTimes[date][time]++;
+        }
+      }
+    }
+  }
+
+  let output = "";
+  for (const date in commonTimes) {
+    for (const time in commonTimes[date]) {
+      if (commonTimes[date][time] === users.length) {
+        output += `全員が〇の時間: ${date} ${time}~\n`;
+      }
+    }
+  }
+
+  document.getElementById('commonTimes').textContent = output;
+}
+
+
+  document.getElementById('commonTimes').textContent = commonTimes;
 }
 
 
