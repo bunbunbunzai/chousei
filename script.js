@@ -74,7 +74,7 @@ function createCalendarForDate(date) {
   for (let hour = 0; hour < 24; hour++) {
     ["00", "30"].forEach(minute => {
       const timeHeader = document.createElement("th");
-      timeHeader.textContent = `${String(hour).padStart(2, "0")}:${minute}~`;
+      timeHeader.innerHTML = `${String(hour).padStart(2, "0")}<br>:${minute}~`;
       header.appendChild(timeHeader);
     });
   }
