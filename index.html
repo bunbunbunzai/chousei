@@ -7,7 +7,6 @@
 </head>
 <body>
   <h1>日程調整アプリ</h1>
-
   <div>
     <label for="startDate">開始日:</label>
     <input type="date" id="startDate">
@@ -15,31 +14,26 @@
     <input type="date" id="endDate">
     <button onclick="generateTables()">テーブル生成</button>
   </div>
-
   <div>
     <label for="newUser">新規ユーザー名:</label>
     <input type="text" id="newUser">
     <button onclick="addUser()">ユーザー追加</button>
   </div>
-
   <div>
     <button onclick="setSelection('〇')">〇</button>
     <button onclick="setSelection('△')">△</button>
     <button onclick="setSelection('×')">×</button>
   </div>
-
   <div id="dates">
     <!-- 日程テーブルがここに挿入されます -->
   </div>
-
   <div>
     <h2>全員〇の時間</h2>
     <p id="commonTimes"></p>
+    <button onclick="showCommonTimes()">全員〇の時間を表示</button>
   </div>
-
+  <button onclick="resetAll()">すべてリセット</button>
   <script src="script.js"></script>
-
-    <button onclick="resetAll()">すべてリセット</button>
 </body>
 </html>
 
