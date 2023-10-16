@@ -58,18 +58,6 @@ td, th {
   }
 }
 
-/* スマホ対応 */
-@media (max-width: 768px) {
-  th, td {
-    min-width: 80px;
-    max-width: 80px;
-    width: 80px;
-  }
-  .rotate {
-    transform: none;
-    white-space: normal;
-  }
-}
 
 
 
