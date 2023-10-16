@@ -36,7 +36,10 @@ th {
   background-color: rgba(255, 0, 0, 0.3);
 }
 
-/* Adjust cell width */
+.rotate {
+  transform: rotate(-90deg);
+}
+
 th, td {
   min-width: 50px;
   max-width: 50px;
@@ -44,7 +47,6 @@ th, td {
   overflow: hidden;
 }
 
-/* Fix for mobile display */
 @media (max-width: 768px) {
   th, td {
     min-width: 80px;
@@ -52,8 +54,3 @@ th, td {
     width: 80px;
   }
 }
-
-
-
-
-
