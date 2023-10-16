@@ -169,12 +169,42 @@ function showCommonTimes() {
 
   let output = "";
   for (const date in commonTimes) {
+    let lastTime = null;
+    let startTime = null;
     for (const time in commonTimes[date]) {
       if (commonTimes[date][time] === users.length) {
-        output += `全員が〇の時間: ${date} ${time}~\n`;
+        if (!startTime) {
+          startTime = time;
+        }
+        lastTime = time;
+      } else {
+        if (startTime && lastTime) {
+          const endTimeArray = lastTime.split(":");
+          let endHour = parseInt(endTimeArray[0]);
+          let endMinute = parseInt(endTimeArray[1]) + 30;
+          if (endMinute === 60) {
+            endHour++;
+            endMinute = 0;
+          }
+          const endTime = `${String(endHour).padStart(2, "0")}:${String(endMinute).padStart(2, "0")}`;
+          output += `全員が〇の時間: ${date} ${startTime}~${endTime}\n`;
+        }
+        startTime = null;
+        lastTime = null;
       }
     }
+    if (startTime && lastTime) {
+      const endTimeArray = lastTime.split(":");
+      let endHour = parseInt(endTimeArray[0]);
+      let endMinute = parseInt(endTimeArray[1]) + 30;
+      if (endMinute === 60) {
+        endHour++;
+        endMinute = 0;
+      }
+      const endTime = `${String(endHour).padStart(2, "0")}:${String(endMinute).padStart(2, "0")}`;
+      output += `全員が〇の時間: ${date} ${startTime}~${endTime}\n`;
+    }
   }
-
   document.getElementById('commonTimes').textContent = output;
 }
+
