@@ -2,39 +2,46 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>日程調整アプリ</title>
+  <title>日程調整</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h1>日程調整アプリ</h1>
-  
-  <label for="newUser">新しいユーザー名: </label>
-  <input type="text" id="newUser">
-  <button onclick="addUser()">追加</button>
-  
-  <div id="selection">
+
+  <div>
+    <label for="startDate">開始日:</label>
+    <input type="date" id="startDate">
+    <label for="endDate">終了日:</label>
+    <input type="date" id="endDate">
+    <button onclick="generateTables()">テーブル生成</button>
+  </div>
+
+  <div>
+    <label for="newUser">新規ユーザー名:</label>
+    <input type="text" id="newUser">
+    <button onclick="addUser()">ユーザー追加</button>
+  </div>
+
+  <div>
     <button onclick="setSelection('〇')">〇</button>
     <button onclick="setSelection('△')">△</button>
     <button onclick="setSelection('×')">×</button>
   </div>
-  
-  <label for="startDate">開始日:</label>
-  <input type="date" id="startDate">
-  
-  <label for="endDate">終了日:</label>
-  <input type="date" id="endDate">
-  
-  <button onclick="generateTables()">テーブル生成</button>
-  
+
+  <button onclick="resetAll()">すべてリセット</button>
+
   <div id="dates">
-    <!-- Dates will be filled by JavaScript -->
+    <!-- 日程テーブルがここに挿入されます -->
   </div>
-  
+
+  <div>
+    <h2>全員〇の時間</h2>
+    <p id="commonTimes"></p>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
-<button onclick="resetAll()">全てリセット</button>
-<div id="commonTimes"></div>
 
 
 
