@@ -18,6 +18,12 @@ th, td {
   border: 1px solid #ccc;
   text-align: center;
   padding: 5px;
+  min-width: 50px;
+  max-width: 100px;
+  width: 5vw;
+  min-height: 50px;
+  max-height: 100px;
+  height: 5vh;
 }
 
 th {
@@ -38,25 +44,11 @@ th {
 
 .rotate {
   transform: rotate(-90deg);
-}
-
-th, td {
-  min-width: 100px;
+  line-height: 5vh;
+  min-width: 50px;
   max-width: 100px;
-  width: 100px;
-  height: 50px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  width: 5vw;
+  min-height: 50px;
+  max-height: 100px;
+  height: 5vh;
 }
-
-@media (max-width: 768px) {
-  th, td {
-    min-width: 100px;
-    max-width: 100px;
-    width: 100px;
-    height: 50px;
-    font-size: 10px;
-  }
-}
-
