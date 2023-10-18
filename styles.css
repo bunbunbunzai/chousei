@@ -38,13 +38,13 @@ th {
 
 .rotate {
   transform: rotate(-90deg);
-  height: 50px;
+  height: 50px; /* This should match the cell height */
+  font-size: 14px; /* This is the font size you want */
 }
 
-/* Default cell size */
 th, td {
-  width: 25px;  /* Adjusted from 50px to 25px */
-  height: 50px;  /* Height remains the same */
+  width: 14px; /* This should match the font size above */
+  height: 50px; /* This can be any height you want */
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -53,12 +53,14 @@ th, td {
 /* Mobile adjustments */
 @media (max-width: 768px) {
   th, td {
-    width: 15px;  /* Further smaller cell width for mobile */
-    height: 50px;  /* Height remains the same */
-    font-size: 8px;  /* Font size remains the same */
+    width: 10px;  /* Smaller font size thus smaller width */
+    height: 30px;  /* Smaller cell height */
+    font-size: 10px;  /* Smaller font size */
   }
 
   .rotate {
-    height: 50px;  /* Header height remains the same */
+    height: 30px;  /* Smaller header height */
+    font-size: 10px; /* Adjust the font size */
   }
 }
+
