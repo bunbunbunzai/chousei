@@ -38,34 +38,29 @@ th {
 
 .rotate {
   transform: rotate(-90deg);
-  line-height: 0.8; /* Adjust line height to reduce vertical spacing */
-  margin: 0; /* Remove any margins */
-  padding: 0; /* Remove any padding */
-  font-size: 14px; /* Set the font size */
-  height: 50px; /* This should match the cell height */
-  white-space: nowrap;
+  height: 50px;
+  width: 20px;  /* As narrow as possible without overlapping */
 }
 
-
 th, td {
-  width: 14px; /* This should match the font size above */
-  height: 50px; /* This can be any height you want */
+  width: 20px;  /* As narrow as possible without overlapping */
+  height: 50px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-/* Mobile adjustments */
 @media (max-width: 768px) {
   th, td {
-    width: 10px;  /* Smaller font size thus smaller width */
-    height: 30px;  /* Smaller cell height */
-    font-size: 10px;  /* Smaller font size */
+    width: 15px;  /* Even narrower for mobile, adjust as needed */
+    height: 30px;
+    font-size: 8px;
   }
 
   .rotate {
-    height: 30px;  /* Smaller header height */
-    font-size: 10px; /* Adjust the font size */
+    height: 30px;
+    width: 15px;  /* Even narrower for mobile, adjust as needed */
   }
 }
+
 
