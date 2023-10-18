@@ -38,9 +38,14 @@ th {
 
 .rotate {
   transform: rotate(-90deg);
+  line-height: 0.8; /* Adjust line height to reduce vertical spacing */
+  margin: 0; /* Remove any margins */
+  padding: 0; /* Remove any padding */
+  font-size: 14px; /* Set the font size */
   height: 50px; /* This should match the cell height */
-  font-size: 14px; /* This is the font size you want */
+  white-space: nowrap;
 }
+
 
 th, td {
   width: 14px; /* This should match the font size above */
