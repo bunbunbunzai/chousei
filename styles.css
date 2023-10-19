@@ -39,7 +39,7 @@ th {
 .rotate {
   transform: rotate(-90deg);
   height: 20px;  /* Adjusted to match cell height */
-  width: 50px;
+  width: 20px;  /* Adjusted to match cell width */
   padding: 0;
   font-size: 12px;
   line-height: 1;
