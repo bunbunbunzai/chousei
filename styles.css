@@ -38,8 +38,8 @@ th {
 
 .rotate {
   transform: rotate(-90deg);
-  height: 20px;  /* Adjusted to match cell height */
-  width: 20px;  /* Adjusted to match cell width */
+  height: 19px;  /* Adjusted to match cell height */
+  width: 19px;  /* Adjusted to match cell width */
   padding: 0;
   font-size: 12px;
   line-height: 1;
@@ -62,9 +62,10 @@ th, td {
   }
 
   .rotate {
-    height: 15px;
-    width: 15px;
+    height: 14px;
+    width: 14px;
   }
 }
+
 
 
