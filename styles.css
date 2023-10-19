@@ -38,18 +38,17 @@ th {
 
 .rotate {
   transform: rotate(-90deg);
-  height: 5px;  /* これが回転後の幅に影響します */
-  width: 50px;  /* この設定は縦に影響します */
-  padding: 0;  /* パディングを0に */
-  font-size: 12px;  /* フォントサイズを調整 */
-  line-height: 1;  /* 行の高さを調整 */
-  white-space: nowrap;  /* 改行を防ぐ */
+  height: 20px;  /* Adjusted to match cell height */
+  width: 50px;
+  padding: 0;
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
 }
-
 
 th, td {
   width: 20px;  /* As narrow as possible without overlapping */
-  height: 50px;
+  height: 20px;  /* Adjusted to match rotated text height */
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -57,14 +56,14 @@ th, td {
 
 @media (max-width: 768px) {
   th, td {
-    width: 15px;  /* Even narrower for mobile, adjust as needed */
-    height: 30px;
+    width: 15px;
+    height: 15px;
     font-size: 8px;
   }
 
   .rotate {
-    height: 30px;
-    width: 15px;  /* Even narrower for mobile, adjust as needed */
+    height: 15px;
+    width: 15px;
   }
 }
 
